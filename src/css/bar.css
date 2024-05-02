@@ -1,0 +1,112 @@
+/* bar.css */
+
+.bar-chart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    background-color: rgb(27, 170, 222);
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rating {
+    margin-bottom: 20px;
+  }
+  
+  .circle {
+    position: relative;
+    width: 99px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  
+  .bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: var(--percentage, 0%);
+    width: 100%;
+    background-color: var(--bar-color);
+    animation: fillAnimation 2s ease-in-out, oceanAnimation 4s infinite;
+  }
+  
+  .fill {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: var(--percentage, 0%);
+    width: 50%;
+    background-color: #f0f0f0;
+    z-index: 1;
+    animation: fillAnimation 2s ease-in-out, oceanAnimation 4s infinite;
+  }
+  
+  .percentage {
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #000;
+  }
+  
+  .good {
+    --bar-color: #4caf50;
+  }
+  
+  .meh {
+    --bar-color: #ffc107;
+  }
+  
+  .bad {
+    --bar-color: #f44336;
+  }
+  
+  @keyframes fillAnimation {
+    0% {
+      height: 0%;
+    }
+    100% {
+      height: var(--percentage);
+    }
+  }
+  
+  @keyframes oceanAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform:  rotate(-1deg);
+    }
+    50% {
+      transform:  rotate(1deg);
+    }
+    75% {
+      transform:  rotate(1deg);
+    }
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+  }
+
+
+
+
+    @media (max-width: 578px){
+      .circle {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+    }

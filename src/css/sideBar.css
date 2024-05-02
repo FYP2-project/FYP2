@@ -1,0 +1,108 @@
+.SideBarComponent {
+    width: 100px;
+    height: 100vh;
+    position: fixed;
+    margin-top: 46px;
+    z-index: 1;
+  }
+  
+  .SideBar {
+    height: 100%;
+    width: 200px;
+    background-color: rgba(49, 63, 98, 0.866);
+    transition: width 0.3s ease;
+  }
+  
+  .toggleButton {
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .SideBarList {
+    height: auto;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .SideBarList .row {
+    width: 100%;
+    height: 50px;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: font-size 0.3s ease; 
+  }
+  
+  .SideBarList .row:hover {
+    cursor: pointer;
+    background-color: rgba(43, 54, 82, 0.868);
+    animation: bounce1 0.5s ease;
+  }
+  @keyframes bounce1 {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .SideBarList #active {
+    background-color: rgba(49, 62, 93, 0.868);
+  }
+  
+
+  .SideBarComponent.minimized .SideBar {
+    width: 50px;
+  }
+  
+  .SideBarComponent.minimized .SideBarList .row .title{
+    font-size: 0; /* Set font size to 0 when sidebar is minimized */
+  }
+  .SideBarComponent.minimized .SideBarList .row .icon{
+flex: 1000%;
+  }
+  
+  
+  .row .icon{
+    flex: 30%;
+    display: grid;
+    place-items: center;
+    animation: bounce2 0.5s ease;
+  }
+
+  .row .title{
+    flex: 70%;
+  }
+  
+  @keyframes bounce2 {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+  @media screen and (max-width: 576px) {
+    .SideBarComponent {
+      width: 100px;
+      height: 100svh;
+      position: fixed;
+      margin-top: 46px;
+      z-index: 1;
+    }
+  }

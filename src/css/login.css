@@ -1,0 +1,204 @@
+body {
+  background-color: #e6e8ed;
+  font-size: 16px; 
+}
+
+#login-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 2em; 
+  border-radius: 1em; 
+  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1); 
+  width: 18em; 
+  max-width: 30em; 
+  max-height: 40em; 
+}
+
+.form-signin {
+  width: 90%;
+  max-width: 28em; 
+  margin: auto;
+}
+
+.form-signin h1 {
+  text-align: center;
+  margin-bottom: 1.25em; 
+  color: #333;
+}
+
+.form-signin input[type="email"],
+.form-signin input[type="password"] {
+  width: calc(100% - 1em); 
+  padding: 0.625em; 
+  margin-bottom: 1.25em; 
+  border: 1px solid #ccc;
+  border-radius: 0.313em; 
+}
+
+.form-signin button[type="submit"] {
+  width: 100%;
+  padding: 0.625em; 
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.313em; 
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 1.25em; 
+  width: 70%;
+  max-width: 18em; 
+  max-height: 18em;
+}
+.video {
+  position: absolute;
+  top: 2%;
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 75%;
+  height: 29%;
+  max-width: 18em; 
+  max-height: 18em;
+  object-fit: cover; 
+  opacity: 0; 
+  transition: opacity 0s ease; 
+}
+
+ .video:hover {
+  opacity: 1; 
+}
+.form-signin button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.forgot-password {
+  text-align: left;
+  margin-top: 0.625em; 
+}
+
+.forgot-password a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.625em; 
+  animation: bounceError 0.5s ease;
+}
+
+@keyframes bounceError {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.error-input {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-0.625em); 
+  }
+  20%, 40%, 60%, 80% {
+      transform: translateX(0.625em); 
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #login-form {
+      width: 50%;
+      max-width: 30em; 
+      max-height: 40em; 
+      padding: 1.25em; 
+  }
+
+  .video {
+    position: absolute;
+    top: 3%;
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 72%;
+    height: 29%;
+    max-width: 18em; 
+    max-height: 18em;
+    object-fit: cover; 
+    opacity: 0; 
+    transition: opacity 0s ease; 
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #login-form {
+      width: 60%;
+      max-width: 30em; 
+      max-height: 40em; 
+      padding: 1.25em; 
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #login-form {
+      width: 80%;
+      max-width: 30em; 
+      max-height: 40em; 
+      padding: 1.25em; 
+  }
+  .video {
+    position: absolute;
+    top: 2%;
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 70%;
+    height: 29%;
+    max-width: 18em; 
+    max-height: 18em;
+    object-fit: cover; 
+    opacity: 0; 
+    transition: opacity 0s ease; 
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #login-form {
+      width: 80%;
+      max-width: 30em; 
+      max-height: 40em; 
+      padding: 1.25em; 
+  }
+  .video {
+    position: absolute;
+    top: 1%;
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 70%;
+    height: 27%;
+    max-width: 18em; 
+    max-height: 18em;
+    object-fit: cover; 
+    opacity: 0; 
+    transition: opacity 0s ease; 
+  }
+}

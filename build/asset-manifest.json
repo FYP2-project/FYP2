@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.77e4c0de.css",
+    "main.js": "/static/js/main.0f680a34.js",
+    "static/js/206.98f3de99.chunk.js": "/static/js/206.98f3de99.chunk.js",
+    "static/media/qiu.mp4": "/static/media/qiu.d8211f9e063d14ea47f0.mp4",
+    "static/media/qiu.png": "/static/media/qiu.323ef0bbcdfba23eef45.png",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.77e4c0de.css",
+    "static/js/main.0f680a34.js"
+  ]
+}
