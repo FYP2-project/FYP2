@@ -29,8 +29,9 @@ const FeedbackUserList = () => {
           const feedbackDocSnapshot = await getDoc(feedbackDocRef);
           if (feedbackDocSnapshot.exists()) {
             const feedbackData = feedbackDocSnapshot.data();
+            setFeedbackTitle(feedbackData.title); 
             if (feedbackData.FeedbackAnswer) {
-              setFeedbackTitle(feedbackData.title); 
+              
               const usersAnswers = await Promise.all(
                 feedbackData.FeedbackAnswer.map(async (answer) => {
                   const userDocRef = doc(db, "student", answer.uid);
@@ -65,7 +66,7 @@ const FeedbackUserList = () => {
       userAnswers.forEach((answer) => {
         if (answer.answers && answer.questionTypes) {
           answer.answers.forEach((userAnswer, index) => {
-            if (answer.questionTypes[index] === "multipleChoice") {
+            if (answer.questionTypes[index] === "Rating") {
               const questionIndex = index.toString();
               if (!questionCounts[questionIndex]) {
                 questionCounts[questionIndex] = { total: 0, count: 0 };
@@ -92,13 +93,13 @@ const FeedbackUserList = () => {
         <SideBar onToggleMinimized={toggleMinimized} />
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h1>Feedback User List</h1>
-         
+         <h1 className="event-title">Title: {feedbackTitle}</h1> 
           {loading ? ( // Render loading indicator if loading is true
               <div className="spinner-container">
               <div className="spinner"></div>
             </div>
           ) : (
-            <> <h1 className="event-title">Title: {feedbackTitle}</h1> 
+            <> 
             <div className="user-answers-container">
               {userAnswers.length > 0 ? (
                 userAnswers.map((answer, index) => (

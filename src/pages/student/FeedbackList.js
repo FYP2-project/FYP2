@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../css/TopBar.css"; 
 import "../../App.css"
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import { Link } from "react-router-dom";
 import StudentTopBar from "../../component/student/StudnetTopBar";
@@ -18,28 +18,30 @@ const FeedbackList = () => {
   const toggleMinimized = (isMinimized) => {
     setMinimized(isMinimized);
   };
-
   useEffect(() => {
-      const fetchFeedback = async () => {
-        try {
-          const feedbackCollectionRef = collection(db, "feedback");
-          const feedbackSnapshot = await getDocs(feedbackCollectionRef);
-          let feedbackData = feedbackSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          
-          // Sort feedback by date in descending order (newest first)
-          feedbackData.sort((a, b) => new Date(b.date) - new Date(a.date));
-          
-          setFeedbackList(feedbackData);
-        } catch (error) {
-          console.error("Error fetching feedback:", error);
-        }
-      };
-    
-      fetchFeedback();
-      setLoading(false); 
-    }, []);
+    const fetchFeedback = async () => {
+      try {
+        const feedbackCollectionRef = collection(db, "feedback");
+        const feedbackQuery = query(feedbackCollectionRef, where("status", "==", "ongoing")); 
+        const feedbackSnapshot = await getDocs(feedbackQuery);
 
-  // Function to handle search query change
+        let feedbackData = feedbackSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+       
+        feedbackData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        setFeedbackList(feedbackData);
+      } catch (error) {
+        console.error("Error fetching feedback:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedback();
+  }, []);
+
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -68,7 +70,7 @@ const FeedbackList = () => {
       <StudentSideBar onToggleMinimized={toggleMinimized} />
       <div>
         <div className={`content${minimized ? 'minimized' : ''}`}>
-          <h1>Manage Feedback</h1>
+          <h1>Feedback</h1>
           {/* Search bar */}
           <input
             type="text"

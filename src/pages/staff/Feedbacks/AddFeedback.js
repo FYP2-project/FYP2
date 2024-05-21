@@ -19,6 +19,7 @@ const AddFeedback = () => {
     content: "",
     date: "",
     enddate:"",
+    status:"",
     image: "https://firebasestorage.googleapis.com/v0/b/fyp2-app-525c3.appspot.com/o/feedback%2FUntitled%20design.gif?alt=media&token=6fc740fd-6a3c-4e65-bec8-7e39dfba075b",
     questions: [], // Array to store questions
     questionTypes: [], // Array to store question types (multiple choice or answer)
@@ -76,6 +77,7 @@ const AddFeedback = () => {
       content: "",
       date: "",
       enddate:"",
+      status:"",
       questions: [],
       questionTypes: [],
     });
@@ -109,6 +111,7 @@ const AddFeedback = () => {
               onChange={handleChange}
               required
             />
+            
              <input
              className="AddNewEventInput"
               type="date"
@@ -118,7 +121,7 @@ const AddFeedback = () => {
               onChange={handleChange}
               required
             />
-            <h5 className="event-image-info">Feedback End Date</h5>
+            <h5 className="event-image-info">please enter a date to end the Feedback the feedback will end at the 11:59 PM of that day</h5>
              <input
              className="AddNewEventInput"
               type="date"
@@ -128,6 +131,18 @@ const AddFeedback = () => {
               onChange={handleChange}
               required
             />
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              required
+              
+            >
+              <option value="">Select Status</option>
+              <option value="ongoing">Ongoing</option>
+              <option value="close">Close</option>
+            </select>
             <textarea
               name="content"
               placeholder="Description"
@@ -150,8 +165,8 @@ const AddFeedback = () => {
                   <input
                     type="radio"
                     name={`questionType${index}`}
-                    value="answer"
-                    checked={formData.questionTypes[index] === "answer"}
+                    value="Q&A"
+                    checked={formData.questionTypes[index] === "Q&A"}
                     onChange={(e) => handleQuestionTypeChange(index, e)}
                   />
                   Q&A
@@ -160,8 +175,8 @@ const AddFeedback = () => {
                   <input
                     type="radio"
                     name={`questionType${index}`}
-                    value="multipleChoice"
-                    checked={formData.questionTypes[index] === "multipleChoice"}
+                    value="Rating"
+                    checked={formData.questionTypes[index] === "Rating"}
                     onChange={(e) => handleQuestionTypeChange(index, e)}
                   />
                   Rating

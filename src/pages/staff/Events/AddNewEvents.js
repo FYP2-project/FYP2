@@ -178,7 +178,7 @@ const AddNewEvents = () => {
               onChange={handleChange}
               required
             />
-            <h5 className="event-image-info">please enter a date to end the event registration</h5>
+            <h5 className="event-image-info">please enter a date to end the event registration the event will end at the 11:59 PM of that day</h5>
              <input
                   className="AddNewEventInput"
               type="date"
@@ -206,6 +206,7 @@ const AddNewEvents = () => {
               value={formData.status}
               onChange={handleChange}
               required
+              
             >
               <option value="">Select Status</option>
               <option value="open">Open</option>
@@ -238,6 +239,7 @@ const AddNewEvents = () => {
               value={formData.seats}
               onChange={handleChange}
               required
+              min="0"
             />
             <textarea
               name="description"

@@ -168,7 +168,7 @@ const EditFeedback = () => {
               onChange={handleChange}
               required
             />
-             <h5 className="event-image-info">Feedback End Date</h5>
+            <h5 className="event-image-info">please enter a date to end the Feedback the feedback will end at the 11:59 PM of that day</h5>
              <input
              className="AddNewEventInput"
               type="date"
@@ -178,6 +178,18 @@ const EditFeedback = () => {
               onChange={handleChange}
               required
             />
+              <select
+              id="status"
+              name="status"
+              value={feedbackData.status}
+              onChange={handleChange}
+              required
+              
+            >
+              <option value="">Select Status</option>
+              <option value="ongoing">Ongoing</option>
+              <option value="close">Close</option>
+            </select>
               <textarea
                 name="content"
                 placeholder="Description"
@@ -200,8 +212,8 @@ const EditFeedback = () => {
                     <input
                       type="radio"
                       name={`questionType${index}`}
-                      value="answer"
-                      checked={feedbackData.questionTypes[index] === "answer"}
+                      value="Q&A"
+                      checked={feedbackData.questionTypes[index] === "Q&A"}
                       onChange={(e) => handleQuestionTypeChange(index, e)}
                     />
                     Q&A
@@ -210,8 +222,8 @@ const EditFeedback = () => {
                     <input
                       type="radio"
                       name={`questionType${index}`}
-                      value="multipleChoice"
-                      checked={feedbackData.questionTypes[index] === "multipleChoice"}
+                      value="Rating"
+                      checked={feedbackData.questionTypes[index] === "Rating"}
                       onChange={(e) => handleQuestionTypeChange(index, e)}
                     />
                     Rating

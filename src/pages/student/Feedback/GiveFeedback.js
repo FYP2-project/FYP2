@@ -96,7 +96,7 @@ const GiveFeedback = ({ match }) => {
     const handleFeedbackSubmit = (e) => {
       e.preventDefault();
       for (let i = 0; i < feedback.questions.length; i++) {
-        if (feedback.questionTypes[i] === "multipleChoice") {
+        if (feedback.questionTypes[i] === "Rating") {
           const answer = userAnswers[i];
           if (!answer || answer < 1 || answer > 5) {
             alert("Please select a rating from 1 to 5 for each Rating question.");
@@ -152,8 +152,8 @@ const GiveFeedback = ({ match }) => {
                 <form  onSubmit={handleFeedbackSubmit}>
                   {feedback.questions.map((question, index) => (
                     <div className="GivefeedbackForm" key={index}>
-                      <p><strong>Qustions {index + 1}:</strong> {question} {feedback.questionTypes[index] === "multipleChoice" ? "" :""}</p>
-                      {feedback.questionTypes[index] === "multipleChoice" ? (
+                      <p><strong>Qustions {index + 1}:</strong> {question} {feedback.questionTypes[index] === "Rating" ? "" :""}</p>
+                      {feedback.questionTypes[index] === "Rating" ? (
                         <select
                         className="feedback-select"
                           value={userAnswers[index]}
@@ -191,7 +191,9 @@ const GiveFeedback = ({ match }) => {
               </div>
             </div>
           ) : (
-            <p>Loading...</p>
+            <div className="spinner-container">
+                <div className="spinner"></div>
+              </div>
           )}
         </div>
           {/* Confirmation Dialog */}

@@ -62,7 +62,7 @@ const ManageSeminar = () => {
       <SideBar onToggleMinimized={toggleMinimized} />
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
-          <h2>Manage Presentations</h2>
+          <h2>Manage Seminar</h2>
           {/* Search bar */}
           <input
             type="text"

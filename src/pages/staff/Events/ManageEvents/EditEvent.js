@@ -311,7 +311,7 @@ const EditEvent = () => {
             <input className="AddNewEventInput" type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
             <input className="AddNewEventInput" type="date" name="date" placeholder="Date" value={formData.date} onChange={handleChange} required />
             <input className="AddNewEventInput" type="time" name="time" placeholder="Time" value={formData.time} onChange={handleChange} required />
-            <h5 className="event-image-info">please enter a date to end the event registration</h5>
+            <h5 className="event-image-info">please enter a date to end the event registration the event will end at the 11:59 PM of that day</h5>
              <input
                   className="AddNewEventInput"
               type="date"
@@ -343,7 +343,7 @@ const EditEvent = () => {
             <br/>
             <button className="AddButton"  type="button" onClick={handleAddPresenter}>Add More Presenter</button>
             <br/>
-            <input className="AddNewEventInput" type="number" name="seats" placeholder="Available Seats" value={formData.seats} onChange={handleChange} required />
+            <input className="AddNewEventInput" type="number" name="seats" placeholder="Available Seats" value={formData.seats} onChange={handleChange} required min="0"/>
             <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required></textarea>
             <select name="type" value={formData.type} onChange={handleChange} required>
               <option value="">Select Type</option>
