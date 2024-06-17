@@ -15,8 +15,8 @@ const GiveFeedback = ({ match }) => {
     const dispatch = useDispatch();
     const [minimized, setMinimized] = useState(true);
     const [feedback, setFeedback] = useState(null);
-    const [userAnswers, setUserAnswers] = useState([]); // State to store user's answers
-    const [hasAnswered, setHasAnswered] = useState(false); // State to track if the user has answered already
+    const [userAnswers, setUserAnswers] = useState([]); 
+    const [hasAnswered, setHasAnswered] = useState(false); 
     const [showConfirmation, setShowConfirmation] = useState(false); 
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);  
     const { id } = useParams();
@@ -35,16 +35,16 @@ const GiveFeedback = ({ match }) => {
             const feedbackData = feedbackDocSnapshot.data();
             setFeedback(feedbackData);
   
-            // Check if user's UID is in the FeedbackAnswer array
+            
             if (feedbackData.FeedbackAnswer) {
               const userAnswerIndex = feedbackData.FeedbackAnswer.findIndex(answer => answer.uid === currentUser.uid);
               if (userAnswerIndex !== -1) {
-                // User has already answered, disable the form submission
+                
                 setHasAnswered(true);
               }
             }
   
-            // Initialize userAnswers state with empty answers array
+            
             const initialAnswers = feedbackData.questions.map(() => "");
             setUserAnswers(initialAnswers);
           } else {
@@ -69,7 +69,7 @@ const GiveFeedback = ({ match }) => {
       e.preventDefault(); 
       if (feedback.enddate < currentDate) {
         alert("The feedback submission deadline has passed.");
-        return; // Prevent form submission
+        return; 
       }
     
       
@@ -100,14 +100,14 @@ const GiveFeedback = ({ match }) => {
           const answer = userAnswers[i];
           if (!answer || answer < 1 || answer > 5) {
             alert("Please select a rating from 1 to 5 for each Rating question.");
-            return; // Prevent form submission
+            return; 
           }
         } else {
-          // Check if answer questions have at least 2 characters
+          
           const answer = userAnswers[i];
           if (!answer || answer.length < 2) {
             alert("Q&A questions must have at least 2 characters.");
-            return; // Prevent form submission
+            return; 
           }
         }
       }
@@ -115,7 +115,7 @@ const GiveFeedback = ({ match }) => {
     };
 
     const cancelFeedbackSubmit = () => {
-      setShowConfirmation(false); // Hide confirmation dialog if user cancels
+      setShowConfirmation(false); 
     };
 
 
@@ -196,7 +196,7 @@ const GiveFeedback = ({ match }) => {
               </div>
           )}
         </div>
-          {/* Confirmation Dialog */}
+        
        {showConfirmation && (
             <ConfirmationDialog
               message="Are you sure you want to submit this feedback?"

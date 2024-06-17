@@ -737,6 +737,10 @@ background-color: red;
   margin-bottom: 10px;
 }
 
+.ErrorWriting{
+  align-self: flex-start;
+}
+
 @media (max-width: 900px){
   
 

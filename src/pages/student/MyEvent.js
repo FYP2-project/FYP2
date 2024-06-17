@@ -28,7 +28,7 @@ const MyEvent = () => {
               Array.isArray(event.participate) && event.participate.some((participant) => participant.uid === currentUser.uid)
             );
 
-            // Sort events based on date in descending order
+            
             myEvents.sort((a, b) => {
               const dateA = new Date(a.date).getTime();
               const dateB = new Date(b.date).getTime();

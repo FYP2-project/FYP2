@@ -29,7 +29,7 @@ const StudentEvents = () => {
         let q = collection(db, "Events");
         q = query(q, where("status", "==", "open"));
 
-        // Apply filters if set
+        
         if (filterType !== "") {
           q = query(q, where("type", "==", filterType));
         }
@@ -44,7 +44,7 @@ const StudentEvents = () => {
           ...doc.data(),
         }));
 
-        // Sort events based on date in descending order
+        
         otherEventData.sort((a, b) => {
           const dateA = new Date(a.date).getTime();
           const dateB = new Date(b.date).getTime();
@@ -52,7 +52,7 @@ const StudentEvents = () => {
         });
 
         setOtherEvents(otherEventData);
-        setLoading(false); // Data fetched, so set loading to false
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching OtherEvents:", error);
       }
@@ -60,12 +60,12 @@ const StudentEvents = () => {
     fetchOtherEvents();
   }, [filterType, filterOnline]);
 
-  // Function to handle search query change
+  
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  // Function to filter events by title based on search query
+  
   const filteredEvents = otherEvents.filter((event) =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase())
   );

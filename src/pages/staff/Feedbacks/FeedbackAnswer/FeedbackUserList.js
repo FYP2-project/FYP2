@@ -43,7 +43,7 @@ const FeedbackUserList = () => {
                   }
                 })
               );
-              setUserAnswers(usersAnswers.filter((answer) => answer)); // Remove undefined values
+              setUserAnswers(usersAnswers.filter((answer) => answer)); 
             }
           } else {
             console.error("Feedback not found");
@@ -51,7 +51,7 @@ const FeedbackUserList = () => {
         } catch (error) {
           console.error("Error fetching user answers:", error);
         } finally {
-          setLoading(false); // Set loading to false after fetching data
+          setLoading(false); 
         }
       };
   
@@ -61,7 +61,7 @@ const FeedbackUserList = () => {
     const calculateAverageAnswers = () => {
       const averages = [];
       const questionCounts = {};
-      const questionData = []; // Array to store question numbers and average ratings
+      const questionData = []; 
     
       userAnswers.forEach((answer) => {
         if (answer.answers && answer.questionTypes) {
@@ -81,10 +81,10 @@ const FeedbackUserList = () => {
       for (const index in questionCounts) {
         const average = questionCounts[index].total / questionCounts[index].count;
         averages.push(average);
-        questionData.push({ questionNumber: index, averageRating: average }); // Store question number and average rating
+        questionData.push({ questionNumber: index, averageRating: average }); 
       }
     
-      return questionData; // Return array of objects containing question numbers and average ratings
+      return questionData; 
     };
   
     return (
@@ -94,7 +94,7 @@ const FeedbackUserList = () => {
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h1>Feedback User List</h1>
          <h1 className="event-title">Title: {feedbackTitle}</h1> 
-          {loading ? ( // Render loading indicator if loading is true
+          {loading ? ( 
               <div className="spinner-container">
               <div className="spinner"></div>
             </div>

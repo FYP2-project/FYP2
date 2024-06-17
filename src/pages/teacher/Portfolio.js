@@ -50,7 +50,7 @@ const Portfolio = () => {
                     setUserData(userData);
                     setIsLoading(false);
                     if (userData.briefing) {
-                        setBriefing(userData.briefing); // Set briefing if it exists
+                        setBriefing(userData.briefing); 
                     }
                 } else {
                     setError("User data not found");

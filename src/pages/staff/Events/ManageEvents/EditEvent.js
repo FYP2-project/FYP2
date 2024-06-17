@@ -44,9 +44,9 @@ const EditEvent = () => {
   });
   const [file, setFile] = useState(null);
   const [perc, setPerc] = useState(0);
-  const [uploading, setUploading] = useState(false); // Track upload state
+  const [uploading, setUploading] = useState(false); 
   const [loading, setLoading] = useState(true);
-
+  const currentDate = new Date().toISOString().split('T')[0];
   const toggleMinimized = (isMinimized) => {
     setMinimized(isMinimized);
   };
@@ -100,7 +100,7 @@ const EditEvent = () => {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      // Check file type
+
       const fileType = selectedFile.type;
       if (
         fileType === "image/png" ||
@@ -108,7 +108,7 @@ const EditEvent = () => {
         fileType === "image/gif"
       ) {
         setFile(selectedFile);
-        startUpload(selectedFile); // Start upload immediately
+        startUpload(selectedFile); 
       } else {
         setShowErrorMessage(true);
         setErrorMessage("Only PNG, JPEG, and GIF file types are allowed.");
@@ -117,12 +117,12 @@ const EditEvent = () => {
   };
 
   const startUpload = (file) => {
-    setUploading(true); // Set uploading state to true
+    setUploading(true); 
     const name = new Date().getTime() + file.name;
     const storageRef = ref(storage, "Events/" + name);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    // Track upload progress
+
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -143,10 +143,10 @@ const EditEvent = () => {
         setErrorMessage("Error uploading file!");
       },
       () => {
-        // Once upload is complete, update formData with image URL
+
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setFormData({ ...formData, image: downloadURL });
-          setUploading(false); // Set uploading state to false
+          setUploading(false); 
         });
       }
     );
@@ -156,7 +156,7 @@ const EditEvent = () => {
     e.preventDefault();
     try {
       if (!uploading) {
-        // If not currently uploading, submit the form directly
+       
         submitForm();
       } else {
         console.log("Image is still uploading...");
@@ -194,11 +194,11 @@ const EditEvent = () => {
 
   const handleChangeSubmit = (e) => {
     e.preventDefault();
-    setShowConfirmation(true); // Show confirmation dialog
+    setShowConfirmation(true); 
   };
 
   const cancelChangeSubmit = () => {
-    setShowConfirmation(false); // Hide confirmation dialog if user cancels
+    setShowConfirmation(false);
   };
 
   const handleDeleteMessage = (e) => {
@@ -227,50 +227,50 @@ const EditEvent = () => {
   };
 
   const handleDownload = () => {
-    const qrCodeSVG = document.querySelector(".QrCode"); // Get the QR code SVG element
+    const qrCodeSVG = document.querySelector(".QrCode");
 
-    // Create a canvas element
+
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
 
-    // Create an image element to hold the converted PNG image
+
     const image = new Image();
 
-    // Set canvas dimensions to match SVG
+
     canvas.width = qrCodeSVG.width.baseVal.value;
     canvas.height = qrCodeSVG.height.baseVal.value;
 
-    // Convert SVG to a data URL
+   
     const svgData = new XMLSerializer().serializeToString(qrCodeSVG);
     const svgURL = "data:image/svg+xml;base64," + btoa(svgData);
 
-    // Load SVG data into image
+
     image.onload = () => {
-      // Draw SVG image onto canvas
+
       context.drawImage(image, 0, 0);
 
-      // Convert canvas to PNG data URL
+
       const pngDataURL = canvas.toDataURL("image/png");
 
-      // Create a download link for PNG
+  
       const downloadLink = document.createElement("a");
       downloadLink.href = pngDataURL;
       downloadLink.download = "qr_code.png";
       document.body.appendChild(downloadLink);
       downloadLink.click();
 
-      // Clean up
+ 
       document.body.removeChild(downloadLink);
     };
 
-    // Set image source to SVG data URL
+
     image.src = svgURL;
   };
   const handleAddPresenter = () => {
     setFormData({ ...formData, presenters: [...formData.presenters, ""] });
   };
 
-  // Function to handle changing presenter input values
+
   const handlePresenterChange = (index, value) => {
     const newPresenters = [...formData.presenters];
     newPresenters[index] = value;
@@ -309,7 +309,7 @@ const EditEvent = () => {
               )}
             </div>
             <input className="AddNewEventInput" type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-            <input className="AddNewEventInput" type="date" name="date" placeholder="Date" value={formData.date} onChange={handleChange} required />
+            <input className="AddNewEventInput" type="date" name="date" placeholder="Date" value={formData.date} onChange={handleChange} required/>
             <input className="AddNewEventInput" type="time" name="time" placeholder="Time" value={formData.time} onChange={handleChange} required />
             <h5 className="event-image-info">please enter a date to end the event registration the event will end at the 11:59 PM of that day</h5>
              <input
@@ -319,6 +319,7 @@ const EditEvent = () => {
               placeholder="Date"
               value={formData.enddate}
               onChange={handleChange}
+              min={currentDate}
               required
             />
             <select name="Online" value={formData.Online} onChange={handleChange} required>
@@ -336,7 +337,7 @@ const EditEvent = () => {
               <div style={{display:"flex", flexDirection:"row", flexWrap:"nowrap", alignItems:"flex-start"}} key={index}>
                 <br/>
                 <input className="AddNewEventInput" type="text" placeholder="Presenters" value={presenter} onChange={(e) => handlePresenterChange(index, e.target.value)} />
-                <button className="RemoveButton" type="button" onClick={() => handleRemovePresenter(index)}>Remove Presenter</button>
+                <button className="RemoveButton" type="button" onClick={() => handleRemovePresenter(index)} disabled={formData.presenters.length === 1}>Remove Presenter</button>
                 <br/>
               </div>
             ))}
@@ -374,6 +375,8 @@ const EditEvent = () => {
               placeholder="Link"
               value={formData.link}
               onChange={handleChange}
+              required={formData.Online === "yes" || formData.Online === "both"}
+              
             />
             <h5 className="event-image-info">please use 1:1 aspect ratio image</h5>
             <div>

@@ -25,14 +25,14 @@ const RecordLecturerAttendance = () => {
   useEffect(() => {
     const fetchDataAndCopyIds = async () => {
       try {
-        // Copy user IDs to Lparticipate
+        
         const teacherCollectionRef = collection(db, "teacher");
         const teacherQuerySnapshot = await getDocs(teacherCollectionRef);
         const userIds = teacherQuerySnapshot.docs.map(doc => doc.id);
         const eventDocRef = doc(db, "Events", id);
         await updateDoc(eventDocRef, { Lparticipate: userIds });
   
-        // Fetch event data
+        
         const eventDocSnapshot = await getDoc(eventDocRef);
         if (eventDocSnapshot.exists()) {
           const eventData = eventDocSnapshot.data();
@@ -40,7 +40,7 @@ const RecordLecturerAttendance = () => {
           const presenting = eventData.presenting || [];
           const attending = eventData.attending || [];
   
-          // Fetch user data based on Lparticipate
+          
           const usersPromises = Lparticipate.map(async (Lparticipant) => {
             const userDocRef = doc(db, "teacher", Lparticipant);
             const userDocSnapshot = await getDoc(userDocRef);
@@ -56,7 +56,7 @@ const RecordLecturerAttendance = () => {
           });
           setEvents(eventData);
           const usersData = await Promise.all(usersPromises);
-          setUsers(usersData.filter((user) => user)); // Remove undefined values
+          setUsers(usersData.filter((user) => user)); 
           setLoading(false);
         } else {
           console.error("Event not found");
@@ -70,7 +70,7 @@ const RecordLecturerAttendance = () => {
   
     fetchDataAndCopyIds();
   }, [id]);
-  // Fetch teachers based on selected facility
+  
   useEffect(() => {
     const fetchTeachersByFacility = async () => {
       try {
@@ -97,15 +97,15 @@ const RecordLecturerAttendance = () => {
     try {
       const eventDocRef = doc(db, "Events", id);
   
-      // Get the current event data
+      
       const eventDocSnapshot = await getDoc(eventDocRef);
       if (eventDocSnapshot.exists()) {
         const eventData = eventDocSnapshot.data();
   
-        // Update attendance status based on type
+        
         let updatedUsers = users.map((user) => {
           if (user.id === userId) {
-            // If the checkbox is checked, update the type and uncheck the other type
+            
             if (checked) {
               return { ...user, [type]: true, [type === "presenting" ? "attending" : "presenting"]: false };
             } else {
@@ -115,10 +115,10 @@ const RecordLecturerAttendance = () => {
           return user;
         });
   
-        // Update Firestore document based on the changes
+        
         await updateAttendanceInFirestore(userId, checked, eventData, type);
   
-        // Update the local state to reflect the changes
+        
         setUsers(updatedUsers);
       }
     } catch (error) {
@@ -131,7 +131,7 @@ const RecordLecturerAttendance = () => {
       const eventDocRef = doc(db, "Events", id);
       const { presenting, attending } = eventData;
   
-      // Update the 'Lpresent' and 'Labsent' arrays based on checkbox state changes
+      
       let presentingArray = presenting;
       let attendingArray = attending;
   
@@ -151,7 +151,7 @@ const RecordLecturerAttendance = () => {
         }
       }
   
-      // Update the document in Firestore
+      
       await updateDoc(eventDocRef, { presenting: presentingArray, attending: attendingArray });
     } catch (error) {
       console.error("Error updating attendance in Firestore:", error);

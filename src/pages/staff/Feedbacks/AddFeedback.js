@@ -21,10 +21,11 @@ const AddFeedback = () => {
     enddate:"",
     status:"",
     image: "https://firebasestorage.googleapis.com/v0/b/fyp2-app-525c3.appspot.com/o/feedback%2FUntitled%20design.gif?alt=media&token=6fc740fd-6a3c-4e65-bec8-7e39dfba075b",
-    questions: [], // Array to store questions
-    questionTypes: [], // Array to store question types (multiple choice or answer)
+    questions: [], 
+    questionTypes: [], 
   });
 
+  const currentDate = new Date().toISOString().split('T')[0];
   const toggleMinimized = (isMinimized) => {
     setMinimized(isMinimized);
   };
@@ -35,7 +36,7 @@ const AddFeedback = () => {
   };
 
   const handleAddQuestion = () => {
-    // Add a new question to the questions array and set its type to 'answer' by default
+
     setFormData({
       ...formData,
       questions: [...formData.questions, ""],
@@ -44,21 +45,21 @@ const AddFeedback = () => {
   };
 
   const handleQuestionChange = (index, e) => {
-    // Update the question at the specified index
+
     const questions = [...formData.questions];
     questions[index] = e.target.value;
     setFormData({ ...formData, questions });
   };
 
   const handleQuestionTypeChange = (index, e) => {
-    // Update the question type at the specified index
+
     const questionTypes = [...formData.questionTypes];
     questionTypes[index] = e.target.value;
     setFormData({ ...formData, questionTypes });
   };
 
   const handleRemoveQuestion = (index) => {
-    // Remove the question and question type at the specified index
+
     const questions = [...formData.questions];
     const questionTypes = [...formData.questionTypes];
     questions.splice(index, 1);
@@ -69,9 +70,14 @@ const AddFeedback = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
  
-    // Dispatch the action to add feedback
+    const atLeastOneSelected = formData.questionTypes.every(type => type === "Q&A" || type === "Rating");
+
+    if (!atLeastOneSelected) {
+      alert("One of the Question Type is not selected for all questions!");
+      return; 
+    }
     dispatch(addFeedback(formData));
-    // Optionally, you can clear the form fields after submission
+ 
     setFormData({
       title: "",
       content: "",
@@ -86,11 +92,11 @@ const AddFeedback = () => {
   };
   const handleAddFeedbackConfirm = (e) => {
     e.preventDefault();
-    setShowConfirmation(true); // Show confirmation dialog
+    setShowConfirmation(true); 
   };
 
   const cancelAddFeedbackConfirm = () => {
-    setShowConfirmation(false); // Hide confirmation dialog if user cancels
+    setShowConfirmation(false);
   };
 
 
@@ -119,6 +125,7 @@ const AddFeedback = () => {
               placeholder="Date"
               value={formData.date}
               onChange={handleChange}
+              min={currentDate}
               required
             />
             <h5 className="event-image-info">please enter a date to end the Feedback the feedback will end at the 11:59 PM of that day</h5>
@@ -129,6 +136,7 @@ const AddFeedback = () => {
               placeholder="Date"
               value={formData.enddate}
               onChange={handleChange}
+              min={currentDate}
               required
             />
             <select
@@ -150,7 +158,7 @@ const AddFeedback = () => {
               onChange={handleChange}
               required
             ></textarea>
-            {/* Render input fields for questions */}
+        
             {formData.questions.map((question, index) => (
               <div className="QustionsConstainer" key={index}>
                 <input
@@ -168,6 +176,7 @@ const AddFeedback = () => {
                     value="Q&A"
                     checked={formData.questionTypes[index] === "Q&A"}
                     onChange={(e) => handleQuestionTypeChange(index, e)}
+                    
                   />
                   Q&A
                 </label>
@@ -178,16 +187,17 @@ const AddFeedback = () => {
                     value="Rating"
                     checked={formData.questionTypes[index] === "Rating"}
                     onChange={(e) => handleQuestionTypeChange(index, e)}
+                    
                   />
                   Rating
                 </label>
-                <button className="RemoveButton" type="button" onClick={() => handleRemoveQuestion(index)}>Remove Question</button>
+                <button className="RemoveButton" type="button" onClick={() => handleRemoveQuestion(index) } disabled={formData.questions.length === 1}>Remove Question</button>
               </div>
             ))}
                <br/>
             <button className="AddButton" type="button" onClick={handleAddQuestion}>Add Question</button>
             <br/>
-            <button type="submit">Submit Feedback</button>
+            <button type="submit" disabled={formData.questions.length === 0}>Submit Feedback</button>
           </form>
         </div>
       </div>

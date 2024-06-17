@@ -13,7 +13,7 @@ const FeedbackList = () => {
   const dispatch = useDispatch();
   const [minimized, setMinimized] = useState(true);
   const [feedbackList, setFeedbackList] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [loading, setLoading] = useState(true);
   const toggleMinimized = (isMinimized) => {
     setMinimized(isMinimized);
@@ -46,7 +46,7 @@ const FeedbackList = () => {
     setSearchQuery(event.target.value);
   };
 
-  // Filter feedback list based on search query
+  
   const filteredFeedbackList = feedbackList.filter((feedback) =>
     feedback.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -71,7 +71,7 @@ const FeedbackList = () => {
       <div>
         <div className={`content${minimized ? 'minimized' : ''}`}>
           <h1>Feedback</h1>
-          {/* Search bar */}
+         
           <input
             type="text"
             placeholder="Search by title"

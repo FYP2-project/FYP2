@@ -42,7 +42,7 @@ const LecturerAttendance  = () => {
     setLoading(false); 
   }, [selectedFacility]);
 
-  // Filter events based on search query
+  
   const filteredEvents = events.filter((event) =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -66,7 +66,7 @@ const LecturerAttendance  = () => {
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Lecturer Attendance</h2>
-          {/* Search bar */}
+       
           <input
             type="text"
             placeholder="Search events"

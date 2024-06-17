@@ -31,7 +31,7 @@ const RecordAttendance = () => {
           const eventData = eventDocSnapshot.data();
           const participate = eventData.participate || [];
           const present = eventData.present || [];
-          const absent = participate.filter(uid => !present.includes(uid)); // Initialize all users as absent
+          const absent = eventData.absent || [];
 
           const usersPromises = participate.map(async (participant) => {
             const userDocRef = doc(db, "student", participant.uid);
@@ -42,7 +42,7 @@ const RecordAttendance = () => {
           });
           setEvents(eventData)
           const usersData = await Promise.all(usersPromises);
-          setUsers(usersData.filter((user) => user)); // Remove undefined values
+          setUsers(usersData.filter((user) => user)); 
           setLoading(false);
         } else {
           console.error("Event not found");
@@ -60,15 +60,15 @@ const RecordAttendance = () => {
     try {
       const eventDocRef = doc(db, "Events", id);
   
-      // Get the current event data
+      
       const eventDocSnapshot = await getDoc(eventDocRef);
       if (eventDocSnapshot.exists()) {
         const eventData = eventDocSnapshot.data();
   
-        // Update attendance status based on type
+        
         let updatedUsers = users.map((user) => {
           if (user.id === userId) {
-            // If the checkbox is checked, update the type and uncheck the other type
+            
             if (checked) {
               return { ...user, [type]: true, [type === "present" ? "absent" : "present"]: false };
             } else {
@@ -78,10 +78,10 @@ const RecordAttendance = () => {
           return user;
         });
   
-        // Update Firestore document based on the changes
+        
         await updateAttendanceInFirestore(userId, checked, eventData, type);
   
-        // Update the local state to reflect the changes
+        
         setUsers(updatedUsers);
       }
     } catch (error) {
@@ -94,7 +94,7 @@ const RecordAttendance = () => {
       const eventDocRef = doc(db, "Events", id);
       const { present, absent } = eventData;
   
-      // Update the 'present' and 'absent' arrays based on checkbox state changes
+      
       let presentArray = present;
       let absentArray = absent;
   
@@ -114,7 +114,7 @@ const RecordAttendance = () => {
         }
       }
   
-      // Update the document in Firestore
+      
       await updateDoc(eventDocRef, { present: presentArray, absent: absentArray });
     } catch (error) {
       console.error("Error updating attendance in Firestore:", error);

@@ -33,17 +33,17 @@ const RegisterEvents = () => {
         const eventData = docSnapshot.data();
         setEventDetails(eventData);
 
-        // Calculate remaining seats
+        
         const registeredUsers = eventData.participate ? eventData.participate.length : 0;
         const remainingSeats = eventData.seats - registeredUsers;
 
-        // Update eventDetails state with remaining seats
+        
         setEventDetails(prevState => ({
           ...prevState,
           remainingSeats: remainingSeats >= 0 ? remainingSeats : 0
         }));
 
-        // Check if current user is registered for the event
+        
         if (eventData.participate && eventData.participate.some(user => user.uid === currentUser.uid)) {
           setIsRegistered(true);
         }
@@ -92,7 +92,7 @@ const RegisterEvents = () => {
       Link: eventDetails.link,
     };
 
-    // Send email using EmailJS
+    
     emailjs.send(process.env.REACT_APP_RESETEMAIL_SERVICE_ID, process.env.REACT_APP_RESETEMAIL_TEMPLATE_ID, templateParams, process.env.REACT_APP_RESETEMAIL_PUBLIC_KEY)
       .then((response) => {
         console.log('Email sent successfully:', response);

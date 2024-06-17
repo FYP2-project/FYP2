@@ -14,8 +14,8 @@ const EvaluatePortfolio = () => {
   const [minimized, setMinimized] = useState(true);
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
-  const [selectedDepartment, setSelectedDepartment] = useState(""); // State to store selected department
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [selectedDepartment, setSelectedDepartment] = useState(""); 
   const navigate = useNavigate();
   
   const toggleMinimized = (isMinimized) => {
@@ -31,13 +31,13 @@ const EvaluatePortfolio = () => {
           ...doc.data()
         }));
         setTeachers(teachersData);
-        setLoading(false); // Set loading to false after fetching all teachers
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching teachers:", error);
       }
     };
     fetchTeachers();
-  }, []); // Empty dependency array to fetch data only once
+  }, []); 
 
   const handleDepartmentChange = (e) => {
     setSelectedDepartment(e.target.value);
@@ -57,7 +57,7 @@ const EvaluatePortfolio = () => {
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Teachers</h2>
           
-          {/* Search input */}
+        
           <input
             type="text"
             placeholder="Search teachers..."

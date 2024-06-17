@@ -141,8 +141,8 @@ const addStaffStart = () => ({
             await setDoc(staffDocRef, {
                 email: email,
                 name: name,
-                image: defaultImageURL, // Set default image URL here
-                // You can add more fields here as needed
+                image: defaultImageURL, 
+                
             });
             // Save user data to localStorage
             localStorage.setItem("newUser", encryptData(user));
@@ -179,13 +179,13 @@ export const addNewStudent = (email, name, password) => {
       try {
           const { user } = await createUserWithEmailAndPassword(auth, email, password);
           const staffDocRef = doc(db, "student", user.uid);
-          // Set default image URL
+         
           const defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/fyp2-app-525c3.appspot.com/o/staff%2Fprofile.png?alt=media&token=5f5a57a4-2205-4d2f-9a21-c9e9b3038deb";
           await setDoc(staffDocRef, {
               email: email,
               name: name,
-              image: defaultImageURL, // Set default image URL here
-              // You can add more fields here as needed
+              image: defaultImageURL, 
+              
           });
           // Save user data to localStorage
           localStorage.setItem("newUser", encryptData(user));
@@ -232,8 +232,8 @@ export const addNewTeacher = (email,name,scientifictitle,department, password) =
               name: name,
               scientifictitle: scientifictitle,
               department:department,
-              image: defaultImageURL, // Set default image URL here
-              // You can add more fields here as needed
+              image: defaultImageURL, 
+             
           });
           // Save user data to localStorage
           localStorage.setItem("newUser", encryptData(user));
@@ -265,8 +265,8 @@ const addEventStart = () => ({
   export const addEvent = (eventData) => {
     return async function (dispatch) {
       try {
-        const eventsCollectionRef = collection(db, "Events"); // Reference to the events collection
-        await addDoc(eventsCollectionRef, eventData); // Add a new document with a random ID
+        const eventsCollectionRef = collection(db, "Events"); 
+        await addDoc(eventsCollectionRef, eventData); 
         console.log("Event added successfully!");
       } catch (error) {
         console.error("Error adding event:", error);
@@ -274,7 +274,7 @@ const addEventStart = () => ({
     };
   };
 
-// Action creator to update event details
+// Action to update event details
 export const updateEventDetails = (eventId, eventData) => {
   return async function (dispatch) {
     try {
@@ -290,7 +290,7 @@ export const updateEventDetails = (eventId, eventData) => {
 };
 
 
-// Action creator to delete event
+// Action to delete event
 export const deleteEventData = (eventId) => {
   return async function (dispatch) {
     try {
@@ -346,8 +346,8 @@ export const registerEvent = (eventId, currentUser) => {
   export const addFeedback = (feedbackData) => {
     return async function (dispatch) {
       try {
-        const feedbackCollectionRef = collection(db, "feedback"); // Reference to the feedback collection
-        await addDoc(feedbackCollectionRef, feedbackData); // Add a new document with feedback data
+        const feedbackCollectionRef = collection(db, "feedback"); 
+        await addDoc(feedbackCollectionRef, feedbackData); 
         console.log("Feedback added successfully!");
       } catch (error) {
         console.error("Error adding feedback:", error);

@@ -32,17 +32,17 @@ const EventDetails = () => {
         const eventData = docSnapshot.data();
         setEventDetails(eventData);
 
-        // Calculate remaining seats
+        
         const registeredUsers = eventData.participate ? eventData.participate.length : 0;
         const remainingSeats = eventData.seats - registeredUsers;
 
-        // Update eventDetails state with remaining seats
+        
         setEventDetails(prevState => ({
           ...prevState,
           remainingSeats: remainingSeats >= 0 ? remainingSeats : 0
         }));
 
-        // Check if current user is registered for the event
+        
         if (eventData.participate && eventData.participate.some(user => user.uid === currentUser.uid)) {
           setIsRegistered(true);
         }

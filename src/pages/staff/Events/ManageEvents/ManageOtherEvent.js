@@ -39,7 +39,7 @@ const ManageOtherEvent = () => {
     setLoading(false); 
   }, []);
 
-  // Filter other events based on search query
+  
   const filteredOtherEvents = otherEvents.filter((event) =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -63,7 +63,7 @@ const ManageOtherEvent = () => {
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Manage Other Events</h2>
-          {/* Search bar */}
+ 
           <input
             type="text"
             placeholder="Search other events"

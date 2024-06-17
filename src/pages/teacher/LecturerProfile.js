@@ -15,13 +15,13 @@ const LProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [minimized, setMinimized] = useState(true);
-  const [userData, setUserData] = useState(null); // Initialize userData as null
+  const [userData, setUserData] = useState(null); 
   const [imageFile, setImageFile] = useState(null);
   const [isImageUploaded, setIsImageUploaded] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [perc, setPerc] = useState(0);
-  const [isLoading, setIsLoading] = useState(true); // Initialize isLoading as true
-  const [isUpdating, setIsUpdating] = useState(false); // Initialize isUpdating as false
+  const [isLoading, setIsLoading] = useState(true); 
+  const [isUpdating, setIsUpdating] = useState(false); 
   const [showConfirmation, setShowConfirmation] = useState(false); 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);  
   const toggleMinimized = (isMinimized) => {
@@ -29,7 +29,7 @@ const LProfile = () => {
   };
 
   useEffect(() => {
-    // Fetch user data from Firestore
+    
     const fetchUserData = async () => {
       try {
         const userDocRef = doc(db, "teacher", currentUser.uid);
@@ -37,7 +37,7 @@ const LProfile = () => {
         if (userDocSnapshot.exists()) {
           const userData = userDocSnapshot.data();
           setUserData(userData);
-          setIsLoading(false); // Set isLoading to false after data is fetched
+          setIsLoading(false); 
         } else {
           console.error("User data not found");
         }
@@ -59,7 +59,7 @@ const LProfile = () => {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      // Check file type
+      
       const fileType = selectedFile.type;
       if (
         fileType === "image/jpeg" ||
@@ -67,7 +67,7 @@ const LProfile = () => {
         fileType === "image/gif"
       ) {
         setImageFile(selectedFile);
-        uploadFile(selectedFile); // Upload file
+        uploadFile(selectedFile); 
       } else {
         alert("Only JPG, PNG, and GIF file types are allowed.");
       }
@@ -105,8 +105,8 @@ const LProfile = () => {
   };
 
   const handleUpdate = async (e) => {
-    e.preventDefault(); // Prevent form submission
-    setIsUpdating(true); // Set isUpdating to true when update button is clicked
+    e.preventDefault(); 
+    setIsUpdating(true); 
     try {
        dispatch(updateLecturerProfile(currentUser.uid, userData));
       console.log("User data updated successfully");
@@ -117,7 +117,7 @@ const LProfile = () => {
       setShowConfirmation(false);
     }
     
-    // Set a timeout to reset isUpdating after 1.5 seconds
+    
     setTimeout(() => {
       setIsUpdating(false);
     }, 1500);
@@ -125,11 +125,11 @@ const LProfile = () => {
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
-    setShowConfirmation(true); // Show confirmation dialog
+    setShowConfirmation(true); 
   };
 
   const cancelAddSubmit = () => {
-    setShowConfirmation(false); // Hide confirmation dialog if user cancels
+    setShowConfirmation(false); 
   };
 
   return (
@@ -138,7 +138,7 @@ const LProfile = () => {
         <LSideBar onToggleMinimized={toggleMinimized} />
       <div>
         <div className={`content${minimized ? 'minimized' : ''}`}>
-          {isLoading ? ( // Conditional rendering of loading message
+          {isLoading ? ( 
             <div className="spinner-container">
             <div className="spinner"></div>
           </div>
@@ -153,6 +153,7 @@ const LProfile = () => {
                 name="name"
                 value={userData.name}
                 onChange={handleChange}
+                required
               />
               <label>Image:</label>
               <input

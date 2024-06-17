@@ -39,7 +39,7 @@ const ManageSeminar = () => {
     setLoading(false); 
   }, []);
 
-  // Filter presentations based on search query
+  
   const filteredPresentations = presentations.filter((presentation) =>
     presentation.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -63,7 +63,7 @@ const ManageSeminar = () => {
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Manage Seminar</h2>
-          {/* Search bar */}
+      
           <input
             type="text"
             placeholder="Search presentations"

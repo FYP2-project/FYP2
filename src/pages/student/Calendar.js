@@ -145,7 +145,7 @@ const StudentCalendar = () => {
                   <div>
                     {eventsOnDate.map(event => (
                       <p key={event.id}>
-                        <Link to={`https://fyp2-app-525c3.web.app/Student/Events/register/${event.id}`}>
+                        <Link to={`/Student/Events/register/${event.id}`}>
                           {event.title}
                         </Link>
                       </p>

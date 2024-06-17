@@ -22,7 +22,7 @@ const LecturerPortfolio = () => {
     const [presentingEventNames, setPresentingEventNames] = useState([]); 
     const [attendingEventNames, setAttendingEventNames] = useState([]);
     const [showPopup, setShowPopup] = useState(false); 
-    const { id } = useParams(); // Extract the lecturer ID from the URL params
+    const { id } = useParams(); 
 
     const toggleMinimized = (isMinimized) => {
         setMinimized(isMinimized);
@@ -31,7 +31,7 @@ const LecturerPortfolio = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const userDocRef = doc(db, "teacher", id); // Use the extracted lecturer ID
+                const userDocRef = doc(db, "teacher", id); 
                 const userDocSnapshot = await getDoc(userDocRef);
                 if (userDocSnapshot.exists()) {
                     const userData = userDocSnapshot.data();

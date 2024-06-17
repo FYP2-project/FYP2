@@ -39,7 +39,7 @@ const ManageWorkShop = () => {
     setLoading(false); 
   }, []);
 
-  // Filter workshops based on search query
+  
   const filteredWorkshops = workshops.filter((workshop) =>
     workshop.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -64,7 +64,7 @@ const ManageWorkShop = () => {
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Manage Workshop</h2>
-          {/* Search bar */}
+         
           <input
             type="text"
             placeholder="Search workshops"

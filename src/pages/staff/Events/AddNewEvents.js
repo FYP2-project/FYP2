@@ -37,6 +37,7 @@ const AddNewEvents = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);  
   const [perc, setPerc] = useState(0);
   const [file, setFile] = useState(null);
+  const currentDate = new Date().toISOString().split('T')[0];
 
   const toggleMinimized = (isMinimized) => {
     setMinimized(isMinimized);
@@ -50,7 +51,7 @@ const AddNewEvents = () => {
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      // Check file type
+      
       const fileType = selectedFile.type;
       if (
         fileType === "image/jpeg" ||
@@ -58,7 +59,7 @@ const AddNewEvents = () => {
         fileType === "image/gif"
       ) {
         setFile(selectedFile);
-        uploadFile(selectedFile); // Upload file
+        uploadFile(selectedFile); 
       } else {
         alert("Only JPG, PNG, and GIF file types are allowed.");
       }
@@ -90,8 +91,8 @@ const AddNewEvents = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addEvent(formData)); // Dispatch the addEvent action with form data
-    // Optionally, you can clear the form fields after submission
+    dispatch(addEvent(formData)); 
+    
     setFormData({
       title: "",
       date: "",
@@ -116,18 +117,18 @@ const AddNewEvents = () => {
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
-    setShowConfirmation(true); // Show confirmation dialog
+    setShowConfirmation(true); 
   };
 
   const cancelAddSubmit = () => {
-    setShowConfirmation(false); // Hide confirmation dialog if user cancels
+    setShowConfirmation(false); 
   };
 
   const handleAddPresenter = () => {
     setFormData({ ...formData, presenters: [...formData.presenters, ""] });
   };
 
-  // Function to handle changing presenter input values
+  
   const handlePresenterChange = (index, value) => {
     const newPresenters = [...formData.presenters];
     newPresenters[index] = value;
@@ -167,6 +168,7 @@ const AddNewEvents = () => {
               placeholder="Date"
               value={formData.date}
               onChange={handleChange}
+              min={currentDate}
               required
             />
                <input
@@ -186,6 +188,7 @@ const AddNewEvents = () => {
               placeholder="Date"
               value={formData.enddate}
               onChange={handleChange}
+              min={currentDate}
               required
             />
              <select
@@ -222,7 +225,7 @@ const AddNewEvents = () => {
                   value={presenter}
                   onChange={(e) => handlePresenterChange(index, e.target.value)}
                 />
-                <button className="RemoveButton" type="button" onClick={() => handleRemovePresenter(index)}>
+                <button className="RemoveButton" type="button" onClick={() => handleRemovePresenter(index)} disabled={formData.presenters.length === 1}>
                   Remove Presenter
                 </button>
                 <br/>
@@ -292,6 +295,7 @@ const AddNewEvents = () => {
               placeholder="Link"
               value={formData.link}
               onChange={handleChange}
+              required={formData.Online === "yes" || formData.Online === "both"}
               
             />
             <h5 className="event-image-info">please use 1:1 aspect ratio image</h5>

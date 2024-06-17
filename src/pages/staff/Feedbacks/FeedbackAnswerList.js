@@ -35,7 +35,7 @@ const FeedbackAnswerList = () => {
     setLoading(false); 
   }, []);
 
-  // Filter feedback based on search query
+  
   const filteredFeedback = feedbackList.filter((feedback) =>
     feedback.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -60,7 +60,7 @@ const FeedbackAnswerList = () => {
       <div>
         <div className={`content${minimized ? 'minimized' : ''}`}>
           <h1>Feedbacks</h1>
-          {/* Search bar */}
+    
           <input
             type="text"
             placeholder="Search feedback"

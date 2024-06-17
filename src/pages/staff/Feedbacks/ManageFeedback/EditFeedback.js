@@ -24,6 +24,7 @@ const EditFeedback = () => {
     const [showDeleteMessage, setShowDeleteMessage] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);  
        const [loading, setLoading] = useState(true);
+       const currentDate = new Date().toISOString().split('T')[0];
 
     const toggleMinimized = (isMinimized) => {
       setMinimized(isMinimized);
@@ -54,7 +55,7 @@ const EditFeedback = () => {
     };
   
     const handleAddQuestion = () => {
-      // Add a new question to the questions array and set its type to 'answer' by default
+      
       setFeedbackData({
         ...feedbackData,
         questions: [...feedbackData.questions, ""],
@@ -63,21 +64,21 @@ const EditFeedback = () => {
     };
   
     const handleQuestionChange = (index, e) => {
-      // Update the question at the specified index
+      
       const questions = [...feedbackData.questions];
       questions[index] = e.target.value;
       setFeedbackData({ ...feedbackData, questions });
     };
   
     const handleQuestionTypeChange = (index, e) => {
-      // Update the question type at the specified index
+      
       const questionTypes = [...feedbackData.questionTypes];
       questionTypes[index] = e.target.value;
       setFeedbackData({ ...feedbackData, questionTypes });
     };
   
     const handleRemoveQuestion = (index) => {
-      // Remove the question and question type at the specified index
+      
       const questions = [...feedbackData.questions];
       const questionTypes = [...feedbackData.questionTypes];
       questions.splice(index, 1);
@@ -87,6 +88,12 @@ const EditFeedback = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+      const atLeastOneSelected = feedbackData.questionTypes.every(type => type === "Q&A" || type === "Rating");
+
+      if (!atLeastOneSelected) {
+        alert("One of the Question Type is not selected for all questions!");
+        return; 
+      }
       try {
         dispatch(updateFeedback(id, feedbackData));
       } catch (error) {
@@ -99,7 +106,7 @@ const EditFeedback = () => {
     const handleDeleteFeedback = async () => {
       try {
         dispatch(deleteFeedback(id));
-        // Redirect to feedback list page after deletion
+        
         setShowDelete(false);
         setShowDeleteMessage(true); 
       } catch (error) {
@@ -109,11 +116,11 @@ const EditFeedback = () => {
 
     const handleUpdateConfirm = (e) => {
       e.preventDefault();
-      setShowConfirmation(true); // Show confirmation dialog
+      setShowConfirmation(true); 
     };
   
     const cancelUpdateConfirm = () => {
-      setShowConfirmation(false); // Hide confirmation dialog if user cancels
+      setShowConfirmation(false); 
     };
 
     const handleDeleteConfirm = (e) => {
@@ -176,6 +183,7 @@ const EditFeedback = () => {
               placeholder="Date"
               value={feedbackData.enddate}
               onChange={handleChange}
+              min={currentDate}
               required
             />
               <select
@@ -197,7 +205,7 @@ const EditFeedback = () => {
                 onChange={handleChange}
                 required
               ></textarea>
-              {/* Render input fields for questions */}
+             
               {feedbackData.questions && feedbackData.questions.map((question, index) => (
                 <div className="QustionsConstainer" key={index}>
                   <input

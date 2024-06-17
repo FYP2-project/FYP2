@@ -1,4 +1,4 @@
-// BarChart.js
+
 
 import React from "react";
 import '../css/bar.css';
@@ -35,7 +35,7 @@ const BarChart = ({ questionData }) => {
   );
 };
   
-  // Function to determine the rating class based on the average
+  
   const getRatingClass = (average) => {
     if (average >= 4) {
       return "good";
@@ -46,7 +46,7 @@ const BarChart = ({ questionData }) => {
     }
   };
   
-  // Function to determine the fill class based on the percentage
+  
   const getFillClassName = (percentage) => {
     if (percentage >= 75) {
       return "good";

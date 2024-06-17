@@ -39,7 +39,7 @@ const EventList = () => {
     setLoading(false); 
   }, []);
 
-  // Filter events based on search query
+  
   const filteredEvents = events.filter((event) =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -63,7 +63,7 @@ const EventList = () => {
       <div>
         <div className={`content${minimized ? "minimized" : ""}`}>
           <h2>Student Attendance</h2>
-          {/* Search bar */}
+     
           <input
             type="text"
             placeholder="Search events"
